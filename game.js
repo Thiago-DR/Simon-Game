@@ -35,16 +35,17 @@ $(document).ready(function () {
 
     //audio
     function playSound(name) {
-        let audio = new Audio('/sounds/' + name + '.mp3')
+        // let audio = new Audio('/sounds/' + name + '.mp3')
+        let audio = new Audio('https://cdn.rawgit.com/Thiago-DR/Simon-Game/blob/b14266010c29d4c18a34bbb525c60bcb12077333/sounds/blue.mp3')
         audio.play()
     }
 
     //mouse events
     $('.btn').click(function () {
         let userChosenColor = $(this).attr('id')
-        playSound(userChosenColor)
-
         userClickedPattern.push(userChosenColor)
+
+        playSound(userChosenColor)
     });
 
     //button animations
@@ -62,3 +63,4 @@ $(document).ready(function () {
 
 
 })
+
