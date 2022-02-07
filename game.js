@@ -35,6 +35,7 @@ $(document).ready(function () {
         }
 
         gamePattern.push(randomColor)
+
         playSequence(() => {
             userTurn = true
         })
@@ -73,7 +74,8 @@ $(document).ready(function () {
         if (userClickedPattern[index - 1] === gamePattern[index - 1]) {
             if (index === level) {
                 score++
-                setTimeout(nextSequence, 750);
+                userTurn = false
+                setTimeout(nextSequence, 650);
             }
         } else
             gameOver()
@@ -97,6 +99,7 @@ $(document).ready(function () {
         $('.score').hide()
         $('.container').show()
 
+        userTurn = false
         started = false
         level = 0
         score = 0
@@ -152,7 +155,6 @@ $(document).ready(function () {
             $(button).removeClass("pressed")
         }, 100)
     }
-
 
 })
 
