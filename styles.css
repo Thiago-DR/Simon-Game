@@ -14,7 +14,7 @@ body {
 
 #level-title {
 	font-size: 3.5rem;
-	margin: 2rem;
+	margin: 2rem 0;
 	color: #ecdbba;
 }
 
@@ -45,7 +45,7 @@ main {
 	background-color: #ecdbba;
 	margin: 2rem;
 	padding: 0.9rem;
-	min-width: 14rem;
+	min-width: 13rem;
 	border-radius: 5%;
 }
 
@@ -80,10 +80,14 @@ main {
 
 /* media queries */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 690px) {
 	.btn {
 		height: 10rem;
 		width: 10rem;
+	}
+	.btn-start {
+		font-size: 1.7rem;
+		min-width: 10rem;
 	}
 	.container {
 		grid-gap: 1rem;
