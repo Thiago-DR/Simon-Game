@@ -16,12 +16,10 @@ body {
 	margin: 2rem;
 	color: #ecdbba;
 	user-select: none;
-	position: relative;
-	bottom: 40px;
 }
 
 main {
-	min-height: 100vh;
+	max-height: 100vh;
 
 	display: flex;
 	flex-direction: column;
