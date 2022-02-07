@@ -34,11 +34,32 @@ $(document).ready(function () {
 
         gamePattern.push(randomColor)
 
-        $('#' + randomColor).fadeIn(100).fadeOut(150).fadeIn(100)
-        playSound(randomColor)
+
+        playSequence()
 
     }
+    //play sequence 
+    function playSequence() {
+        let delay = calcDelay()
 
+        gamePattern.forEach((button, i) => {
+            setTimeout(() => {
+                $('#' + button).fadeIn(100).fadeOut(150).fadeIn(100)
+                playSound(button)
+            }, delay * i);
+        })
+    }
+
+    function calcDelay() {
+        if (level <= 5)
+            return 500
+        else if (level <= 9)
+            return 400
+        else if (level <= 13)
+            return 350
+        else
+            return 300
+    }
     //update title
     function updateTitle(title) {
         $('#level-title').text(title)
@@ -71,6 +92,7 @@ $(document).ready(function () {
         level = 0
         gamePattern = []
     }
+
     //audio
     function playSound(name) {
         let audio = new Audio('sounds/' + name + '.mp3')
