@@ -3,14 +3,16 @@ $(document).ready(function () {
     let gamePattern = []
     let userClickedPattern = []
     let level = 0
+    let score = 0
     let started = false
+    let userTurn = true
 
     //new color to sequence
     function nextSequence() {
         let randomNumber = Math.floor(Math.random() * 4)
         let randomColor
+        userTurn = false
         userClickedPattern = []
-
         updateTitle(`Level ${++level}`)
 
         switch (randomNumber) {
@@ -33,22 +35,26 @@ $(document).ready(function () {
         }
 
         gamePattern.push(randomColor)
-        playSequence()
-
+        playSequence(() => {
+            userTurn = true
+        })
     }
 
     //play sequence 
-    function playSequence() {
+    function playSequence(callback) {
 
         let delay = calcDelay()
+        let indexCounter = 0
 
-        gamePattern.forEach((button, i) => {
+        gamePattern.forEach((button, index, array) => {
             setTimeout(() => {
                 $('#' + button).fadeIn(100).fadeOut(150).fadeIn(100)
                 playSound(button)
-            }, delay * i);
-        })
+                indexCounter++
 
+                if (indexCounter == array.length) callback()
+            }, delay * index);
+        })
     }
 
     function calcDelay() {
@@ -65,9 +71,10 @@ $(document).ready(function () {
     //compare user pattern with game pattern
     function checkAnswer(index) {
         if (userClickedPattern[index - 1] === gamePattern[index - 1]) {
-            if (index === level)
+            if (index === level) {
+                score++
                 setTimeout(nextSequence, 750);
-
+            }
         } else
             gameOver()
     }
@@ -78,6 +85,7 @@ $(document).ready(function () {
         updateTitle('Game Over')
         $('body').addClass("game-over")
         $('.container').hide()
+        $('.score').text(`Score:${score}`).show()
         $('.btn-start').show()
         $('.btn-start').text('Restart')
 
@@ -86,10 +94,12 @@ $(document).ready(function () {
     function reset() {
         updateTitle('Simon Game')
         $('body').removeClass("game-over")
+        $('.score').hide()
         $('.container').show()
 
         started = false
         level = 0
+        score = 0
         gamePattern = []
     }
 
@@ -121,15 +131,18 @@ $(document).ready(function () {
     })
 
     $('.btn').click(function () {
-        clickAnimation(this)
 
-        let userChosenColor = $(this).attr('id')
-        playSound(userChosenColor)
+        if (userTurn === true) {
 
-        if (started === true) {
-            userClickedPattern.push(userChosenColor)
+            clickAnimation(this)
+            let userChosenColor = $(this).attr('id')
+            playSound(userChosenColor)
 
-            checkAnswer(userClickedPattern.length)
+            if (started === true) {
+                userClickedPattern.push(userChosenColor)
+
+                checkAnswer(userClickedPattern.length)
+            }
         }
     });
 
