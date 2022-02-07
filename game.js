@@ -33,13 +33,13 @@ $(document).ready(function () {
         }
 
         gamePattern.push(randomColor)
-
-
         playSequence()
 
     }
+
     //play sequence 
     function playSequence() {
+
         let delay = calcDelay()
 
         gamePattern.forEach((button, i) => {
@@ -48,6 +48,7 @@ $(document).ready(function () {
                 playSound(button)
             }, delay * i);
         })
+
     }
 
     function calcDelay() {
@@ -59,10 +60,6 @@ $(document).ready(function () {
             return 350
         else
             return 300
-    }
-    //update title
-    function updateTitle(title) {
-        $('#level-title').text(title)
     }
 
     //compare user pattern with game pattern
@@ -77,20 +74,28 @@ $(document).ready(function () {
 
     //game over
     function gameOver() {
+        playSound('wrong')
         updateTitle('Game Over')
         $('body').addClass("game-over")
+        $('.container').hide()
+        $('.btn-start').show()
+        $('.btn-start').text('Restart')
 
-        playSound('wrong')
-
-        setTimeout(reset, 1000)
     }
 
     function reset() {
-        updateTitle('Press Any Key to Start')
+        updateTitle('Simon Game')
         $('body').removeClass("game-over")
+        $('.container').show()
+
         started = false
         level = 0
         gamePattern = []
+    }
+
+    //update title
+    function updateTitle(title) {
+        $('#level-title').text(title)
     }
 
     //audio
@@ -99,15 +104,22 @@ $(document).ready(function () {
         audio.play()
     }
 
-    //keyboard listener     
-    $(document).keypress(function () {
+    //click events 
+    $('.btn-start').click(function () {
+        playSound('start')
+        clickAnimation(this)
+        $('.btn-start').hide()
+
         if (started === false) {
-            nextSequence();
+            setTimeout(nextSequence, 1000)
+            started = true
+        } else {
+            reset()
+            setTimeout(nextSequence, 1000)
             started = true
         }
     })
 
-    //mouse events
     $('.btn').click(function () {
         clickAnimation(this)
 
