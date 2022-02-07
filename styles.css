@@ -18,6 +18,12 @@ body {
 	color: #ecdbba;
 }
 
+.score {
+	font-size: 2rem;
+	margin: 2rem 0;
+	color: #ecdbba;
+}
+
 main {
 	min-height: 90vh;
 
@@ -51,7 +57,6 @@ main {
 
 .game-over {
 	background-color: #3d0000;
-	opacity: 0.8;
 }
 
 .red {
