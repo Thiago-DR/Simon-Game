@@ -109,6 +109,9 @@ $(document).ready(function () {
     $('.btn').mouseout(function () {
         $(this).removeClass("pressed");
     });
+    $('.btn').on("tap", function () {
+        $(this).hide();
+    });
 
 
 })

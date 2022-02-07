@@ -33,12 +33,12 @@ main {
 	display: grid;
 	grid-template-columns: repeat(2, 2fr);
 	grid-auto-rows: auto;
-	grid-gap: 25px;
+	grid-gap: 1.5rem;
 }
 
 .btn {
-	height: 200px;
-	width: 200px;
+	height: 13rem;
+	width: 13rem;
 
 	border-radius: 5%;
 }
@@ -67,4 +67,19 @@ main {
 .pressed {
 	transform: matrix(0.97, 0, 0, 0.97, 0, 0);
 	filter: brightness(120%);
+}
+
+/* media queries */
+
+@media screen and (max-width: 600px) {
+	.btn {
+		height: 10rem;
+		width: 10rem;
+	}
+	.container {
+		grid-gap: 1rem;
+	}
+	#level-title {
+		font-size: 2.3rem;
+	}
 }
