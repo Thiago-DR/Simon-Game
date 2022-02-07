@@ -87,6 +87,8 @@ $(document).ready(function () {
 
     //mouse events
     $('.btn').click(function () {
+        clickAnimation(this)
+
         let userChosenColor = $(this).attr('id')
         playSound(userChosenColor)
 
@@ -97,25 +99,12 @@ $(document).ready(function () {
         }
     });
 
-    //button animations
-    $('.btn').mousedown(function () {
-        $(this).addClass("pressed");
-    });
-
-    $('.btn').mouseup(function () {
-        $(this).removeClass("pressed");
-    });
-
-    $('.btn').mouseout(function () {
-        $(this).removeClass("pressed");
-    });
-
-    $('.btn').on("tap", function () {
-        $(this).addClass("pressed");
+    function clickAnimation(button) {
+        $(button).addClass("pressed");
         setTimeout(function () {
-            $(this).removeClass("pressed")
+            $(button).removeClass("pressed")
         }, 100)
-    });
+    }
 
 
 })
